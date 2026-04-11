@@ -367,7 +367,18 @@
 
   .preview-stage{position:relative;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;transition:all .3s;}
   .preview-stage.mobile{width:320px;margin:0 auto;height:480px;}
-  .preview-box{padding:14px;font-size:12px;line-height:1.7;min-height:120px;white-space:pre-wrap;color:var(--text);height:100%;overflow-y:auto;background:var(--surface);}
+  .preview-box {
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 120px;
+    color: #1a1a1a;
+    height: 100%;
+    overflow-y: auto;
+    background: #ffffff;
+    text-align: left;
+    font-family: 'Montserrat', -apple-system, sans-serif;
+  }
   .preview-nav{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface2);border-top:1px solid var(--border);}
   .preview-tools{display:flex;gap:10px;margin-bottom:10px;justify-content:flex-end;}
 
@@ -607,8 +618,6 @@
               <label>Email Content</label>
               <div class="editor-wrap">
                 <div class="editor-toolbar">
-                  <button class="editor-btn" title="Bold" onclick="execCmd('bold')"><b>B</b></button>
-                  <button class="editor-btn" title="Italic" onclick="execCmd('italic')"><i>I</i></button>
                   <button class="editor-btn" title="Bullet List" onclick="execCmd('insertUnorderedList')">•</button>
                   <div style="width:1px;height:18px;background:var(--border);margin:0 5px;"></div>
                   <span style="font-size:10px;color:var(--text3);margin-right:4px;">Placeholders:</span>
@@ -1050,6 +1059,18 @@ function handleCV(file){
 }
 function removeCV(){cvFile=null;cvBase64=null;cvMime='';document.getElementById('cv-drop').style.display='block';document.getElementById('cv-attached').style.display='none';document.getElementById('cv-input').value='';}
 
+function generateEmailBody(content, rName, rFirm, sName, sEmail, sPhone) {
+  const dName = rName || "Sir/Ma'am";
+  const processedContent = content.replace(/\{name\}/gi, rName || '').replace(/\{firm\}/gi, rFirm || '');
+  return `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;text-align:left;">
+    Dear ${dName},<br><br>
+    ${processedContent.replace(/\n/g,'<br>')}<br><br>
+    Warm Regards,<br>
+    ${sName}<br>
+    ${sEmail}${sPhone ? `<br>${sPhone}` : ''}
+  </div>`;
+}
+
 function updatePreview(){
   const s=document.getElementById('subject').value;
   const b=document.getElementById('editor').innerHTML;
@@ -1070,20 +1091,9 @@ function updatePreview(){
   const pb=document.getElementById('preview-body');
   
   if(b && b !== '<br>'){
-    const dName = r.name || "Sir/Ma'am";
-    const dFirm = r.firm || "your firm";
-    let fullBody = `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:var(--text);">
-      Dear ${dName},<br><br>
-      <strong>Application for CA Articleship position at ${dFirm}</strong><br><br>
-      ${fs(b).replace(/\n/g,'<br>')}<br><br>
-      Warm Regards,<br>
-      ${sName}<br>
-      ${userEmail}`;
-    if (sPhone) fullBody += `<br>${sPhone}`;
-    fullBody += `</div>`;
-    
+    const r=recipients[previewIdx]||{name:'Recipient Name',firm:'Firm Name'};
+    const fullBody = generateEmailBody(b, r.name, r.firm, sName, userEmail, sPhone);
     pb.innerHTML=fullBody;
-    pb.style.color='var(--text)';
   }
   else{
     pb.innerHTML='<span style="color:var(--text3);font-style:italic">Start typing above…</span>';
@@ -1210,15 +1220,7 @@ async function sendAll(){
     const fs=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
     const dName = r.name || "Sir/Ma'am";
     const dFirm = r.firm || "your firm";
-    let fullBody = `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;background-color:#ffffff;padding:20px;border-radius:8px;">
-      Dear ${dName},<br><br>
-      <strong>Application for CA Articleship position at ${dFirm}</strong><br><br>
-      ${fs(bodyTpl).replace(/\n/g,'<br>')}<br><br>
-      Warm Regards,<br>
-      ${sName}<br>
-      ${userEmail}`;
-    if (sPhone) fullBody += `<br>${sPhone}`;
-    fullBody += `</div>`;
+    const fullBody = generateEmailBody(bodyTpl, r.name, r.firm, sName, userEmail, sPhone);
     
     pb.style.width=((i/recipients.length)*100)+'%';
     pl.textContent='Sending '+(i+1)+' of '+recipients.length+'…';
