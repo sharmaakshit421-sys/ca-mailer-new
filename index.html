@@ -435,10 +435,10 @@
     font-size: 14px;
     line-height: 1.6;
     min-height: 120px;
-    color: #1a1a1a;
+    color: var(--text);
     height: 100%;
     overflow-y: auto;
-    background: #ffffff;
+    background: var(--surface);
     text-align: left;
     font-family: 'Montserrat', -apple-system, sans-serif;
   }
@@ -863,8 +863,13 @@
         </div>
 
         <div class="card">
-          <div class="card-header"><span class="card-title">Send Options</span></div>
-          <div class="card-body">
+          <div class="sidebar-card-header">
+            <div class="sidebar-section-title">
+              <div class="sidebar-dot"></div>
+              Send Options
+            </div>
+          </div>
+          <div class="card-body sidebar-card-body">
             <div class="field" style="margin-bottom:14px">
               <label>Schedule Send (Optional)</label>
               <div style="display:flex; align-items:center; gap:8px;">
