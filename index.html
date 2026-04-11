@@ -236,17 +236,6 @@
   }
 
   /* ── STEPPER ── */
-  .stepper-wrap{padding:20px 24px 0;max-width:1200px;margin:0 auto;}
-  .stepper{display:flex;justify-content:space-between;align-items:center;position:relative;background:var(--surface);border:1px solid var(--border);padding:14px 28px;border-radius:var(--radius);box-shadow:none;}
-  .step-item{display:flex;align-items:center;gap:10px;position:relative;z-index:2;transition:all .3s;}
-  .step-num{width:24px;height:24px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid transparent;transition:all .3s;}
-  .step-lbl{font-size:12px;font-weight:600;color:var(--text3);transition:all .3s;}
-  .step-item.active .step-num{background:var(--accent);color:var(--bg);box-shadow:0 0 0 4px var(--accent-light);}
-  .step-item.active .step-lbl{color:var(--accent);}
-  .step-item.done .step-num{background:var(--green);color:var(--bg);}
-  .step-item.done .step-lbl{color:var(--text);}
-  .step-line{flex:1;height:2px;background:var(--border);margin:0 15px;border-radius:2px;}
-  .step-line.done{background:var(--green);}
 
   /* ── MAILER LAYOUT ── */
   .mailer-grid{display:grid;grid-template-columns:1fr 340px;min-height:calc(100vh - 57px);}
@@ -604,17 +593,6 @@
 
   <!-- MAILER PAGE -->
   <div class="page active" id="page-mailer">
-    <div class="stepper-wrap">
-      <div class="stepper">
-        <div class="step-item active" id="step-1"><div class="step-num">1</div><div class="step-lbl">Compose</div></div>
-        <div class="step-line" id="line-1"></div>
-        <div class="step-item" id="step-2"><div class="step-num">2</div><div class="step-lbl">Recipients</div></div>
-        <div class="step-line" id="line-2"></div>
-        <div class="step-item" id="step-3"><div class="step-num">3</div><div class="step-lbl">Review</div></div>
-        <div class="step-line" id="line-3"></div>
-        <div class="step-item" id="step-4"><div class="step-num">4</div><div class="step-lbl">Send</div></div>
-      </div>
-    </div>
     <div class="mailer-grid">
       <div class="left-panel">
 
@@ -897,7 +875,7 @@ function saveDraft(){
   updateCounts();
 }
 function loadDraft(){
-  document.getElementById('subject').value = localStorage.getItem('ca_draft_subj')||'';
+  document.getElementById('subject').value = localStorage.getItem('ca_draft_subj')||'CA Articleship Application';
   document.getElementById('editor').innerHTML = localStorage.getItem('ca_draft_body')||'';
   document.getElementById('sender-name').value = localStorage.getItem('ca_draft_name')||'';
   document.getElementById('sender-phone').value = localStorage.getItem('ca_draft_phone')||'';
