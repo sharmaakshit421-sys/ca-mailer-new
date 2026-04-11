@@ -741,12 +741,11 @@
             <div class="section-header-left">
               <div class="section-num">2</div>
               <div>
-                <div class="section-title">Recipients</div>
+                <div class="section-title">Add Manually</div>
                 <div class="section-sub">Import CSV or add manually</div>
               </div>
             </div>
             <div style="display:flex; align-items:center; gap:12px;">
-              <span id="rec-badge" class="badge badge-green">0 added</span>
             </div>
           </div>
           <div class="card-body">
@@ -783,7 +782,6 @@
 
             <div id="table-tools" style="display:none; margin-bottom:10px; align-items:center; gap:10px;">
               <input type="text" id="rec-search" placeholder="Search recipients..." style="padding:6px 12px; font-size:11px;" oninput="renderTable()">
-              <div id="invalid-badge" class="badge badge-amber" style="display:none">0 invalid emails</div>
             </div>
 
             <div id="table-wrap" class="rec-table-wrap" style="display:none">
@@ -1127,14 +1125,7 @@ function updateCell(i, field, val) {
 }
 
 function updateInvalidBadge() {
-  const inv = recipients.filter(r => r.invalid).length;
-  const badge = document.getElementById('invalid-badge');
-  if(inv > 0) {
-    badge.style.display = 'inline-flex';
-    badge.textContent = inv + ' invalid email' + (inv>1?'s':'');
-  } else {
-    badge.style.display = 'none';
-  }
+  // Badge removed as per request
 }
 
 function renderTable(){
@@ -1151,7 +1142,7 @@ function renderTable(){
       <td>${i+1}</td>
       <td contenteditable="true" onblur="updateCell(${i}, 'name', this.innerText)">${r.name||''}</td>
       <td contenteditable="true" onblur="updateCell(${i}, 'firm', this.innerText)">${r.firm||''}</td>
-      <td contenteditable="true" onblur="updateCell(${i}, 'email', this.innerText)" title="${r.invalid?'Invalid email format':''}">${r.email||''} ${r.invalid?'⚠️':''}</td>
+      <td contenteditable="true" onblur="updateCell(${i}, 'email', this.innerText)" title="${r.invalid?'Invalid email format':''}">${r.email||''}</td>
       <td><button class="del-btn" onclick="removeRecipient(${i})" title="Delete Row">✕</button></td>`;
     tb.appendChild(tr);
   });
@@ -1161,7 +1152,6 @@ function renderTable(){
   document.getElementById('table-tools').style.display = hasRecs ? 'flex' : 'none';
   
   updateInvalidBadge();
-  document.getElementById('rec-badge').textContent=recipients.length+' added';
   document.getElementById('stat-total').textContent=recipients.length;
 }
 
