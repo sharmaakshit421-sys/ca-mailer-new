@@ -718,6 +718,16 @@
                 </div>
               </div>
               <div style="font-size:10px;color:var(--text3);margin-top:6px;">Draft saves automatically. The greeting and sign-off are added during sending.</div>
+              <div style="background:rgba(127, 119, 221, 0.05); border-radius:10px; padding:12px; margin-top:12px; border: 1px solid rgba(127, 119, 221, 0.1);">
+                <div style="font-size:11px; font-weight:600; color:var(--accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Quick Guide
+                </div>
+                <div style="font-size:10px; color:var(--text2); line-height:1.5;">
+                  Use <strong>{name}</strong> and <strong>{firm}</strong> to personalize your email. They will be replaced automatically for each recipient.<br><br>
+                  The greeting (Dear...) and sign-off (Warm Regards...) are added automatically based on the sender details below.
+                </div>
+              </div>
             </div>
             <div style="display:flex; gap:10px; margin-top: 16px;">
               <div class="field" style="flex:1"><label>Your Name (sender)</label><input type="text" id="sender-name" placeholder="e.g. Akshit Sharma" oninput="updatePreview();saveDraft()"></div>
@@ -844,14 +854,6 @@
             <div id="preview-index" class="badge badge-amber" style="position: absolute; right: 16px; top: 14px;">1 / 1</div>
           </div>
           <div class="card-body sidebar-card-body">
-            <div class="preview-tools">
-              <button class="btn btn-ghost btn-sm" onclick="toggleMobilePreview(this)">📱 Mobile View</button>
-            </div>
-            <div style="margin-bottom:10px">
-              <div style="font-size:10px;color:var(--text3);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px;font-weight:600">Subject</div>
-              <div id="preview-subject" style="font-size:12px;font-weight:500;color:var(--text)">—</div>
-            </div>
-            <div style="font-size:10px;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;font-weight:600">Body</div>
             <div id="preview-stage" class="preview-stage">
               <div class="preview-box" id="preview-body"><span style="color:var(--text3);font-style:italic">Start typing above…</span></div>
             </div>
