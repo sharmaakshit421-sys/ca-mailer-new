@@ -1044,7 +1044,7 @@ function updatePreview(){
   if(b && b !== '<br>'){
     const dName = r.name || "Sir/Ma'am";
     const dFirm = r.firm || "your firm";
-    let fullBody = `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:#1f1f1f;">
+    let fullBody = `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:var(--text);">
       Dear ${dName},<br><br>
       <strong>Application for CA Articleship position at ${dFirm}</strong><br><br>
       ${fs(b).replace(/\n/g,'<br>')}<br><br>
@@ -1182,7 +1182,7 @@ async function sendAll(){
     const fs=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
     const dName = r.name || "Sir/Ma'am";
     const dFirm = r.firm || "your firm";
-    let fullBody = `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:#1f1f1f;">
+    let fullBody = `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;background-color:#ffffff;padding:20px;border-radius:8px;">
       Dear ${dName},<br><br>
       <strong>Application for CA Articleship position at ${dFirm}</strong><br><br>
       ${fs(bodyTpl).replace(/\n/g,'<br>')}<br><br>
