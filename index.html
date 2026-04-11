@@ -911,6 +911,15 @@ function switchTab(t){
   if(t==='tracker')renderTracker();
 }
 
+function switchRecTab(t) {
+  document.getElementById('rtab-import').classList.remove('active');
+  document.getElementById('rtab-manual').classList.remove('active');
+  document.getElementById('rtab-'+t).classList.add('active');
+  document.getElementById('rview-import').style.display = t==='import' ? 'block' : 'none';
+  document.getElementById('rview-manual').style.display = t==='manual' ? 'block' : 'none';
+  renderTable();
+}
+
 const dz=document.getElementById('drop-zone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
@@ -965,6 +974,9 @@ function addBlankRow(){
   recipients.push({name:'',firm:'',email:'', invalid: true, selected: false});
   renderTable();updatePreview();
 }
+
+function removeRecipient(i){if(!confirm('Delete this row?'))return;recipients.splice(i,1);renderTable();updatePreview();}
+function clearRecipients(){if(!recipients.length||!confirm('Clear all recipients?'))return;recipients=[];renderTable();updatePreview();}
 
 function updateCell(i, field, val) {
   if (recipients[i]) {
