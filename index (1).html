@@ -214,6 +214,11 @@
     border-radius:var(--radius);overflow:hidden;
     box-shadow:var(--shadow);
     animation: fadeIn 0.35s ease-out both;
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
+  }
+  .card:hover{
+    box-shadow: var(--shadow-md);
+    border-color: var(--border2);
   }
   .card:nth-child(2) { animation-delay: 0.05s; }
   .card:nth-child(3) { animation-delay: 0.1s; }
@@ -235,11 +240,12 @@
     color:var(--text);
     font-family:inherit;
     font-size:13px;outline:none;
-    transition:all .2s;
+    transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   input:focus,textarea:focus,select:focus{
-    border-color:var(--border2);
-    box-shadow:0 0 0 3px rgba(0,0,0,0.03);
+    border-color:var(--text3);
+    box-shadow:0 0 0 4px rgba(0,0,0,0.04);
+    transform:translateY(-1px);
   }
   textarea{min-height:110px;line-height:1.6;resize:vertical;}
   select option{background:var(--surface);}
@@ -250,12 +256,13 @@
   .btn{
     padding:8px 16px;border-radius:var(--radius-sm);
     font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;
-    border:1px solid transparent;transition:all .18s;
+    border:1px solid transparent;
+    transition:transform 0.15s cubic-bezier(0.4,0,0.2,1), background 0.2s, box-shadow 0.2s;
     display:inline-flex;align-items:center;gap:6px;letter-spacing:-0.1px;
   }
   .btn-primary{background:var(--text);color:#fff;border-color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-  .btn-primary:hover{background:#333;transform:translateY(-1px);box-shadow:var(--shadow-md);}
-  .btn-primary:active{transform:translateY(0);}
+  .btn-primary:hover{background:#333;transform:translateY(-2px);box-shadow:var(--shadow-md);}
+  .btn-primary:active{transform:scale(0.97);}
   .btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;}
   .btn-ghost{background:var(--surface2);color:var(--text2);border-color:var(--border);}
   .btn-ghost:hover{background:var(--surface);color:var(--text);border-color:var(--border2);}
@@ -268,11 +275,24 @@
   .drop-zone{
     border:1.5px dashed var(--border2);
     border-radius:var(--radius-sm);padding:24px;
-    text-align:center;cursor:pointer;transition:all .2s;
+    text-align:center;cursor:pointer;
+    transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background:var(--surface2);margin-bottom:10px;
   }
   .drop-zone:hover,.drop-zone.drag-over{
     border-color:var(--text3);background:var(--bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+  .dl-sample {
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:11px; font-weight:600; color:var(--text2);
+    text-decoration:none; padding:4px 12px; border-radius:20px;
+    background:var(--surface); border:1px solid var(--border);
+    transition:all .2s; margin-bottom:16px;
+  }
+  .dl-sample:hover {
+    background:var(--surface2); color:var(--text); border-color:var(--border2); transform:translateY(-1px); box-shadow:0 2px 6px rgba(0,0,0,0.04);
   }
   #file-input,#cv-input{display:none;}
 
@@ -328,7 +348,7 @@
     background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius);padding:18px 20px;
     box-shadow:var(--shadow);
-    transition:all .2s;
+    transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeIn 0.35s ease-out both;
   }
   .summary-card:nth-child(1) { animation-delay: 0s; }
@@ -336,7 +356,7 @@
   .summary-card:nth-child(3) { animation-delay: 0.08s; }
   .summary-card:nth-child(4) { animation-delay: 0.12s; }
   .summary-card:nth-child(5) { animation-delay: 0.16s; }
-  .summary-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+  .summary-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px) scale(1.02);border-color:var(--border2);}
   .summary-num{font-size:28px;font-weight:700;font-family:'DM Mono',monospace;line-height:1;margin-bottom:5px;color:var(--text);}
   .summary-lbl{font-size:11px;color:var(--text2);font-weight:500;}
 
@@ -540,6 +560,11 @@
               <div style="font-size:11px;color:var(--text3);margin-top:2px">Columns: Name, Firm, Email — any order</div>
             </div>
             <input type="file" id="file-input" accept=".csv" onchange="handleFile(this.files[0])">
+            <div style="text-align:right">
+              <a href="data:text/csv;charset=utf-8,Name,Firm,Email%0ARahul%20Sharma,Deloitte,hr%40example.com%0APriya%20Patel,PwC,careers%40example.com" download="Articleship_Sample_Contacts.csv" class="dl-sample">
+                📥 Download Sample format
+              </a>
+            </div>
             <div id="table-wrap" class="rec-table-wrap" style="display:none">
               <table><thead><tr><th>#</th><th>Name</th><th>Firm</th><th>Email</th><th></th></tr></thead><tbody id="rec-tbody"></tbody></table>
             </div>
