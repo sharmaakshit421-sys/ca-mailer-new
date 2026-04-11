@@ -545,8 +545,11 @@
           </div>
           <div class="card-body">
             <div class="field"><label>Subject</label><input type="text" id="subject" placeholder="Application for Articleship at {firm}" oninput="updatePreview()"></div>
-            <div class="field"><label>Body</label><textarea id="body" rows="7" placeholder="Dear {name},&#10;&#10;I am writing to apply for articleship at {firm}..." oninput="updatePreview()"></textarea></div>
-            <div class="field"><label>Your Name (sender)</label><input type="text" id="sender-name" placeholder="e.g. Akshit Sharma"></div>
+            <div class="field"><label>Content Body</label><textarea id="body" rows="6" placeholder="I am writing to apply for the position... (The greeting and sign-off are added automatically!)" oninput="updatePreview()"></textarea></div>
+            <div style="display:flex; gap:10px;">
+              <div class="field" style="flex:1"><label>Your Name (sender)</label><input type="text" id="sender-name" placeholder="e.g. Akshit Sharma" oninput="updatePreview()"></div>
+              <div class="field" style="flex:1"><label>Phone Number (optional)</label><input type="text" id="sender-phone" placeholder="+91 9876543210" oninput="updatePreview()"></div>
+            </div>
           </div>
         </div>
 
@@ -825,12 +828,26 @@ function removeCV(){cvFile=null;cvBase64=null;cvMime='';document.getElementById(
 function updatePreview(){
   const s=document.getElementById('subject').value;
   const b=document.getElementById('body').value;
+  const sName=document.getElementById('sender-name').value.trim()||userEmail;
+  const sPhone=document.getElementById('sender-phone').value.trim();
   const r=recipients[0]||{name:'Recipient Name',firm:'Firm Name'};
-  const f=x=>x.replace(/\{name\}/gi,r.name||'Name').replace(/\{firm\}/gi,r.firm||'Firm');
-  document.getElementById('preview-subject').textContent=s?f(s):'—';
+  const fs=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
+  
+  document.getElementById('preview-subject').textContent=s?fs(s):'—';
   const pb=document.getElementById('preview-body');
-  if(b){pb.textContent=f(b);pb.style.color='var(--text)';}
-  else{pb.innerHTML='<span style="color:var(--text3);font-style:italic">Start typing…</span>';}
+  
+  if(b){
+    const dName = r.name || "Sir/Ma'am";
+    const dFirm = r.firm || "your firm";
+    let fullBody = `Dear ${dName},\n\nApplication for CA Articleship position at ${dFirm}\n\n${fs(b)}\n\nWarm Regards,\n${sName}\n${userEmail}`;
+    if (sPhone) fullBody += `\n${sPhone}`;
+    
+    pb.textContent=fullBody;
+    pb.style.color='var(--text)';
+  }
+  else{
+    pb.innerHTML='<span style="color:var(--text3);font-style:italic">Start typing…</span>';
+  }
 }
 
 function openModal(){
@@ -914,6 +931,7 @@ async function sendAll(){
   const subj=document.getElementById('subject').value;
   const bodyTpl=document.getElementById('body').value;
   const sName=document.getElementById('sender-name').value.trim()||userEmail;
+  const sPhone=document.getElementById('sender-phone').value.trim();
   const logBox=document.getElementById('log-box');
   const pw=document.getElementById('progress-wrap');
   const pb=document.getElementById('progress-bar');
@@ -924,11 +942,16 @@ async function sendAll(){
   log('Starting… '+recipients.length+' recipients','info');
   for(let i=0;i<recipients.length;i++){
     const r=recipients[i];
-    const f=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
+    const fs=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
+    const dName = r.name || "Sir/Ma'am";
+    const dFirm = r.firm || "your firm";
+    let fullBody = `Dear ${dName},\n\nApplication for CA Articleship position at ${dFirm}\n\n${fs(bodyTpl)}\n\nWarm Regards,\n${sName}\n${userEmail}`;
+    if (sPhone) fullBody += `\n${sPhone}`;
+    
     pb.style.width=((i/recipients.length)*100)+'%';
     pl.textContent='Sending '+(i+1)+' of '+recipients.length+'…';
     try{
-      await sendEmail(sName,userEmail,r.email,f(subj),f(bodyTpl));
+      await sendEmail(sName,userEmail,r.email,fs(subj),fullBody);
       sent++;document.getElementById('stat-sent').textContent=sent;
       log('✓ '+r.email+' — '+(r.firm||''),'ok');
       const today=new Date();
