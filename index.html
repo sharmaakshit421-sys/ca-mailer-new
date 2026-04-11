@@ -851,15 +851,10 @@
               <div class="sidebar-dot"></div>
               Live Preview
             </div>
-            <div id="preview-index" class="badge badge-amber" style="position: absolute; right: 16px; top: 14px;">1 / 1</div>
           </div>
           <div class="card-body sidebar-card-body">
             <div id="preview-stage" class="preview-stage">
               <div class="preview-box" id="preview-body"><span style="color:var(--text3);font-style:italic">Start typing above…</span></div>
-            </div>
-            <div class="preview-nav">
-              <button class="btn btn-ghost btn-sm" onclick="cyclePreview(-1)">← Previous</button>
-              <button class="btn btn-ghost btn-sm" onclick="cyclePreview(1)">Next →</button>
             </div>
           </div>
         </div>
@@ -1190,26 +1185,13 @@ function generateEmailBody(content, rName, rFirm, sName, sEmail, sPhone, isPrevi
 }
 
 function updatePreview(){
-  const s=document.getElementById('subject').value;
   const b=document.getElementById('editor').innerHTML;
   const sName=document.getElementById('sender-name').value.trim()||userEmail;
   const sPhone=document.getElementById('sender-phone').value.trim();
-  
-  if(!recipients.length) {
-    document.getElementById('preview-index').textContent = '0 / 0';
-  } else {
-    if(previewIdx >= recipients.length) previewIdx = 0;
-    document.getElementById('preview-index').textContent = (previewIdx+1) + ' / ' + recipients.length;
-  }
-  
-  const r=recipients[previewIdx]||{name:'Recipient Name',firm:'Firm Name'};
-  const fs=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
-  
-  document.getElementById('preview-subject').textContent=s?fs(s):'—';
   const pb=document.getElementById('preview-body');
   
   if(b && b !== '<br>'){
-    const r=recipients[previewIdx]||{name:'Recipient Name',firm:'Firm Name'};
+    const r=recipients[0]||{name:'Recipient Name',firm:'Firm Name'};
     const fullBody = generateEmailBody(b, r.name, r.firm, sName, userEmail, sPhone, true);
     pb.innerHTML=fullBody;
   }
