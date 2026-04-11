@@ -1171,12 +1171,12 @@ function removeCV(){cvFile=null;cvBase64=null;cvMime='';document.getElementById(
 function generateEmailBody(content, rName, rFirm, sName, sEmail, sPhone) {
   const dName = rName || "Sir/Ma'am";
   const processedContent = content.replace(/\{name\}/gi, rName || '').replace(/\{firm\}/gi, rFirm || '');
-  return `<div style="font-family:sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;text-align:left;">
+  const senderLine = sName && sName !== sEmail ? `${sName}<br>` : '';
+  return `<div style="font-family:'Montserrat',sans-serif;font-size:14px;line-height:1.6;color:#1a1a1a;text-align:left;">
     Dear ${dName},<br><br>
     ${processedContent.replace(/\n/g,'<br>')}<br><br>
     Warm Regards,<br>
-    ${sName}<br>
-    ${sEmail}${sPhone ? `<br>${sPhone}` : ''}
+    ${senderLine}${sEmail}${sPhone ? `<br>${sPhone}` : ''}
   </div>`;
 }
 
