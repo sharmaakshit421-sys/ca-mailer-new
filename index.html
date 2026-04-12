@@ -1189,7 +1189,7 @@ function parseCSV(text){
       recipients.push({name:ni>=0?c[ni]:'',firm:fi>=0?c[fi]:'',email:email, invalid: !isValid, selected: false});
     }
   }
-  renderTable();updatePreview();
+  switchRecTab('manual'); updatePreview();
 }
 
 function toggleAllRecs(checked) {
@@ -1255,10 +1255,16 @@ function renderTable(){
     tb.appendChild(tr);
   });
   
+  const isManual = document.getElementById('rtab-manual').classList.contains('active');
   const hasRecs = recipients.length > 0;
-  document.getElementById('table-wrap').style.display = hasRecs ? 'block' : 'none';
-  document.getElementById('table-tools').style.display = hasRecs ? 'flex' : 'none';
+  const showTable = isManual && hasRecs;
+
+  document.getElementById('table-wrap').style.display = showTable ? 'block' : 'none';
+  document.getElementById('table-tools').style.display = showTable ? 'flex' : 'none';
   
+  const sb = document.querySelector('.stats-bar');
+  if(sb) sb.style.display = showTable ? 'flex' : 'none';
+
   updateInvalidBadge();
   document.getElementById('stat-total').textContent=recipients.length;
 }
