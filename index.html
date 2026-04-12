@@ -439,14 +439,36 @@
   #file-input,#cv-input{display:none;}
 
   .rec-table-wrap{overflow-x:auto;max-height:200px;overflow-y:auto;}
-  table{width:100%;border-collapse:collapse;font-size:12px;}
-  th{padding:8px 10px;text-align:left;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);font-weight:600;}
-  td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text);background:var(--surface);transition:background 0.2s;}
-  tr:last-child td{border-bottom:none;}
-  tr.invalid td{background:rgba(226, 75, 74, 0.05);}
-  tr:hover td{background:var(--surface2);}
+  .rec-table-wrap table{width:100%;border-collapse:collapse;font-size:12px;}
+  .rec-table-wrap th{padding:8px 10px;text-align:left;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);font-weight:600;}
+  .rec-table-wrap tr {
+    background: transparent;
+    transition: background 0.12s ease;
+  }
+  .rec-table-wrap tr:hover {
+    background: #1a1a28;
+  }
+  .rec-table-wrap thead tr:hover {
+    background: transparent;
+  }
+  .rec-table-wrap td{
+    padding:8px 10px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+    color:var(--text);
+    transition:background 0.2s;
+  }
+  .rec-table-wrap tr:last-child td{border-bottom:none;}
+  .rec-table-wrap tr.invalid td{background:rgba(226, 75, 74, 0.05);}
   .check-col{width:40px;text-align:center;}
-  input[type="checkbox"]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
+  .rec-table-wrap input[type="checkbox"]{
+    width:16px;height:16px;
+    accent-color:var(--accent);
+    cursor:pointer;
+    transition: accent-color 0.12s ease;
+  }
+  .rec-table-wrap tr:hover input[type="checkbox"] {
+    accent-color: #6b6bff;
+  }
   td[contenteditable="true"]{outline:none;cursor:text;transition:all .15s;}
   td[contenteditable="true"]:hover{background:var(--surface2);}
   td[contenteditable="true"]:focus{background:var(--surface2);box-shadow:inset 0 0 0 2px var(--accent);border-radius:4px;}
