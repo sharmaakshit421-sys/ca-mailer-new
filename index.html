@@ -364,7 +364,7 @@
   .editor-btn.active{background:var(--accent);color:#fff;}
   .editor-chip{padding:4px 10px;border-radius:14px;background:var(--accent-light);color:var(--accent);font-size:10px;font-weight:600;border:1px solid rgba(30,58,138,0.1);cursor:pointer;transition:all .2s;}
   .editor-chip:hover{background:var(--accent);color:#fff;}
-  .editor-content{min-height:160px;max-height:350px;overflow-y:auto;padding:14px;outline:none;font-size:13px;line-height:1.7;white-space:pre-wrap;}
+  .editor-content{min-height:160px;max-height:350px;overflow-y:auto;padding:14px;outline:none;font-size:13px;line-height:1.7;white-space:pre-wrap;background:transparent !important;}
   .editor-footer{margin-top: 6px; padding:6px 14px;border-top:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--text3);}
   select option{background:var(--surface);}
   .field{margin-bottom:12px;}
@@ -1159,6 +1159,12 @@ const dz=document.getElementById('drop-zone');
 dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over');});
 dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
 dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');handleFile(e.dataTransfer.files[0]);});
+
+document.getElementById('editor').addEventListener('paste', e => {
+  e.preventDefault();
+  const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+  document.execCommand('insertText', false, text);
+});
 
 function handleFile(file){
   if(!file)return;
