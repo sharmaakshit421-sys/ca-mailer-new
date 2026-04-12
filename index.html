@@ -759,7 +759,10 @@
   <header>
     <div class="logo">
       <div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-      <div><div class="logo-text">CA Articleship</div></div>
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <div class="logo-text">Bulk Mailer</div>
+        <div style="font-size:9.5px; color:var(--text3); font-weight:400; margin-top:1px; max-width:300px; line-height:1.3; letter-spacing:0;">a place to manage all your ca/cma articleship and industrial training applications and seamlessly track them</div>
+      </div>
     </div>
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="switchTab('mailer')" id="tab-mailer">
@@ -803,10 +806,6 @@
               <div class="editor-wrap">
                 <div class="editor-toolbar">
                   <button class="editor-btn" title="Bullet List" onclick="execCmd('insertUnorderedList')">•</button>
-                  <div style="width:1px;height:18px;background:var(--border);margin:0 5px;"></div>
-                  <span style="font-size:10px;color:var(--text3);margin-right:4px;">Placeholders:</span>
-                  <div class="editor-chip" onclick="insPlaceholder('{name}')">{name}</div>
-                  <div class="editor-chip" onclick="insPlaceholder('{firm}')">{firm}</div>
                 </div>
                 <div id="editor" class="editor-content" contenteditable="true" oninput="updatePreview();saveDraft()"></div>
                 <div class="editor-footer">
@@ -814,14 +813,13 @@
                   <div id="word-count">0 words</div>
                 </div>
               </div>
-              <div style="font-size:10px;color:var(--text3);margin-top:6px;">Draft saves automatically. The greeting and sign-off are added during sending.</div>
+              <div style="font-size:10px;color:var(--text3);margin-top:6px;">The greeting and sign-off are added during sending.</div>
               <div style="background:rgba(127, 119, 221, 0.05); border-radius:10px; padding:12px; margin-top:12px; border: 1px solid rgba(127, 119, 221, 0.1);">
                 <div style="font-size:11px; font-weight:600; color:var(--accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                   Quick Guide
                 </div>
                 <div style="font-size:10px; color:var(--text2); line-height:1.5;">
-                  Use <strong>{name}</strong> and <strong>{firm}</strong> to personalize your email. They will be replaced automatically for each recipient.<br><br>
                   The greeting (Dear...) and sign-off (Warm Regards...) are added automatically based on the sender details below.
                 </div>
               </div>
