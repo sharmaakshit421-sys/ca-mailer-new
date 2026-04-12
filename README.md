@@ -1,4 +1,4 @@
-# CA Articleship — Mailer & Tracker 🚀
+# CA/CMA Articleship and Industrial Training  — Bulk Mailer & Tracker 🚀
 
 A premium, privacy-focused bulk mailer and application tracker designed specifically for CA & CMA students to streamline their articleship and industrial training applications.
 
