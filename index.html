@@ -364,7 +364,17 @@
   .editor-btn.active{background:var(--accent);color:#fff;}
   .editor-chip{padding:4px 10px;border-radius:14px;background:var(--accent-light);color:var(--accent);font-size:10px;font-weight:600;border:1px solid rgba(30,58,138,0.1);cursor:pointer;transition:all .2s;}
   .editor-chip:hover{background:var(--accent);color:#fff;}
-  .editor-content{min-height:160px;max-height:350px;overflow-y:auto;padding:14px;outline:none;font-size:13px;line-height:1.7;white-space:pre-wrap;background:transparent !important;}
+  .editor-content{min-height:160px;max-height:350px;overflow-y:auto;padding:14px;outline:none;font-size:13px;line-height:1.7;white-space:pre-wrap;background:transparent !important;position: relative;}
+  .editor-content:empty:before {
+    content: attr(placeholder);
+    color: var(--text3);
+    pointer-events: none;
+    position: absolute;
+    font-style: italic;
+  }
+  .editor-content:focus:before {
+    display: none;
+  }
   .editor-footer{margin-top: 6px; padding:6px 14px;border-top:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--text3);}
   select option{background:var(--surface);}
   .field{margin-bottom:12px;}
@@ -804,7 +814,7 @@
             <div class="field" style="margin-top: 8px;">
               <label>Email Content</label>
               <div class="editor-wrap">
-                <div id="editor" class="editor-content" style="min-height: 200px;" contenteditable="true" oninput="updatePreview();saveDraft();updateCounts()"></div>
+                <div id="editor" class="editor-content" style="min-height: 200px;" contenteditable="true" placeholder="enter email body here" oninput="updatePreview();saveDraft();updateCounts()"></div>
               </div>
               <div style="background:rgba(127, 119, 221, 0.05); border-radius:10px; padding:12px; margin-top:12px; border: 1px solid rgba(127, 119, 221, 0.1);">
                 <div style="font-size:11px; font-weight:600; color:var(--accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
@@ -812,7 +822,7 @@
                   Quick Guide
                 </div>
                 <div style="font-size:10px; color:var(--text2); line-height:1.5;">
-                  The greeting (Dear...) and sign-off (Warm Regards...) are added automatically based on the sender details below.
+                  <strong>Only put the email body here.</strong> The salutation (Dear...) and signing off (Warm Regards...) are automatically updated based on the information provided below.
                 </div>
               </div>
             </div>
