@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bulk Mailer — CA/CMA Articleship & Tracker</title>
-<meta name="description" content="Send personalized articleship applications via Gmail and track every response. Built for CA & CMA students.">
+<meta name="description" content="Send articleship applications via Gmail and track every response. Built for CA & CMA students.">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
@@ -255,8 +255,6 @@
     .hero-sub{max-width:100%;}
     .connect-box{width:100%;max-width:400px;}
   }
-
-  /* ── STEPPER ── */
 
   /* ── MAILER LAYOUT ── */
   .mailer-grid{display:grid;grid-template-columns:1fr 340px;min-height:calc(100vh - 57px);}
@@ -685,14 +683,14 @@
         Articleship<br>applications,<br><span>streamlined.</span>
       </h1>
       <p class="hero-sub">
-        Send personalized applications for articleship and industrial training directly from Gmail — then track every response effortlessly.
+        Send applications for articleship and industrial training directly from Gmail — then track every response effortlessly.
       </p>
       <div class="hero-features">
         <div class="hero-feat">
           <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div>
           <div class="feat-text">
             <strong>Bulk Gmail Sender</strong>
-            <span>Personalize with {name} & {firm} placeholders. Attach your CV. Send to hundreds in minutes.</span>
+            <span>Write your email body, attach your CV, and send to hundreds of firms in minutes.</span>
           </div>
         </div>
         <div class="hero-feat">
@@ -719,7 +717,7 @@
       </div>
       <div class="connect-divider"></div>
       <div class="connect-title">Get started free</div>
-      <div class="connect-desc">Connect your Gmail to send personalized applications for articleship &amp; industrial training — built for CA &amp; CMA students.</div>
+      <div class="connect-desc">Connect your Gmail to send applications for articleship &amp; industrial training — built for CA &amp; CMA students.</div>
       <div class="connect-perms">
         <p>Access requested</p>
         <div class="perm-item">
@@ -779,7 +777,7 @@
       <div class="logo-icon" style="background:rgba(167,139,250,0.15); width:38px; height:38px; border-radius:10px; flex-shrink:0;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
       <div style="display:flex; flex-direction:column; justify-content:center;">
         <div class="logo-text" style="font-size:15px; font-weight:500; color:#a78bfa; letter-spacing:0;">Bulk Mailer</div>
-        <div style="font-size:12.5px; color:rgba(255,255,255,0.5); font-weight:400; margin-top:2px; max-width:360px; line-height:1.5; letter-spacing:0;">Send personalised CA/CMA articleship and Industrial Training applications to hundreds of firms/ companies in minutes.</div>
+        <div style="font-size:12.5px; color:rgba(255,255,255,0.5); font-weight:400; margin-top:2px; max-width:360px; line-height:1.5; letter-spacing:0;">Send CA/CMA articleship and Industrial Training applications to hundreds of firms in minutes.</div>
       </div>
     </div>
     <div class="nav-tabs">
@@ -798,7 +796,6 @@
         <div class="auth-label">Connected as</div>
         <div class="auth-email" id="user-email-display">—</div>
       </div>
-
       <button class="btn btn-ghost btn-sm" style="margin-left:15px;" onclick="signOut()">Sign out</button>
     </div>
   </header>
@@ -819,11 +816,11 @@
             </div>
           </div>
           <div class="card-body compose-card-body">
-            <div class="field"><label>Subject Line </label><input type="text" id="subject" value="Application for CA Articleship" oninput="updatePreview();saveDraft()"></div>
+            <div class="field"><label>Subject Line</label><input type="text" id="subject" value="Application for CA Articleship" oninput="updatePreview();saveDraft()"></div>
             <div class="field" style="margin-top: 8px;">
               <label>Email Content</label>
               <div class="editor-wrap">
-                <div id="editor" class="editor-content" style="min-height: 200px;" contenteditable="true" placeholder="enter email body here" oninput="updatePreview();saveDraft();updateCounts()"></div>
+                <div id="editor" class="editor-content" style="min-height: 200px;" contenteditable="true" placeholder="Type your email body here..." oninput="updatePreview();saveDraft();updateCounts()"></div>
               </div>
               <div style="background:rgba(127, 119, 221, 0.05); border-radius:10px; padding:12px; margin-top:12px; border: 1px solid rgba(127, 119, 221, 0.1);">
                 <div style="font-size:11px; font-weight:600; color:var(--accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
@@ -831,7 +828,7 @@
                   Quick Guide
                 </div>
                 <div style="font-size:10px; color:var(--text2); line-height:1.5;">
-                  <strong>Only put the email body here.</strong> The salutation (Dear...) and signing off (Warm Regards...) are automatically updated based on the information provided below.
+                  <strong>Only put the email body here.</strong> The salutation (Dear...) and signing off (Warm Regards...) are automatically added based on the information provided below.
                 </div>
               </div>
             </div>
@@ -850,8 +847,6 @@
                 <div class="section-title">Recipients</div>
                 <div class="section-sub">Import CSV or add manually</div>
               </div>
-            </div>
-            <div style="display:flex; align-items:center; gap:12px;">
             </div>
           </div>
           <div class="card-body">
@@ -1093,15 +1088,7 @@ function toggleMobilePreview(btn) {
 }
 
 function execCmd(c,v=null){document.execCommand(c,false,v);document.getElementById('editor').focus();updatePreview();}
-function insPlaceholder(p){
-  const s=window.getSelection();
-  if(!s.rangeCount)return;
-  const r=s.getRangeAt(0);
-  r.deleteContents();
-  r.insertNode(document.createTextNode(p));
-  s.collapseToEnd();
-  updatePreview();saveDraft();
-}
+
 function saveDraft(){
   localStorage.setItem('ca_draft_subj', document.getElementById('subject').value);
   localStorage.setItem('ca_draft_body', document.getElementById('editor').innerHTML);
@@ -1249,9 +1236,7 @@ function updateCell(i, field, val) {
   }
 }
 
-function updateInvalidBadge() {
-  // Badge removed as per request
-}
+function updateInvalidBadge() {}
 
 function renderTable(){
   const tb=document.getElementById('rec-tbody');tb.innerHTML='';
@@ -1294,14 +1279,12 @@ function removeCV(){cvFile=null;cvBase64=null;cvMime='';document.getElementById(
 
 function generateEmailBody(content, rName, rFirm, sName, sEmail, sPhone, isPreview = false) {
   const dName = rName || "Sir/Ma'am";
-  const processedContent = content.replace(/\{name\}/gi, rName || '').replace(/\{firm\}/gi, rFirm || '');
-  const senderLine = sName && sName !== sEmail ? `${sName}<br>` : '';
   const textColor = isPreview ? '#E8E6F8' : '#1a1a1a';
   return `<div style="font-family:'Montserrat',sans-serif;font-size:14px;line-height:1.6;color:${textColor};text-align:left;">
     Dear ${dName},<br><br>
-    ${processedContent.replace(/\n/g,'<br>')}<br><br>
+    ${content.replace(/\n/g,'<br>')}<br><br>
     Warm Regards,<br>
-    ${senderLine}${sEmail}${sPhone ? `<br>${sPhone}` : ''}
+    ${sName && sName !== sEmail ? sName + '<br>' : ''}${sEmail}${sPhone ? `<br>${sPhone}` : ''}
   </div>`;
 }
 
@@ -1449,15 +1432,13 @@ async function sendAll(){
   for(let i=0; i<recipients.length; i++){
     if(stopFlag) { log('Stopped by user.', 'err'); break; }
     const r=recipients[i];
-    const fs=x=>x.replace(/\{name\}/gi,r.name||'').replace(/\{firm\}/gi,r.firm||'');
     const dName = r.name || "Sir/Ma'am";
-    const dFirm = r.firm || "your firm";
     const fullBody = generateEmailBody(bodyTpl, r.name, r.firm, sName, userEmail, sPhone, false);
     
     pb.style.width=((i/recipients.length)*100)+'%';
     pl.textContent='Sending '+(i+1)+' of '+recipients.length+'…';
     try{
-      await sendEmail(sName,userEmail,r.email,fs(subj),fullBody);
+      await sendEmail(sName,userEmail,r.email,subj,fullBody);
       sent++;document.getElementById('stat-sent').textContent=sent;
       log('✓ '+r.email+' — '+(r.firm||''),'ok');
       const today=new Date();
@@ -1555,7 +1536,6 @@ function toggleStatusDropdown(idx, e) {
   document.body.appendChild(menu);
   activeDropdown = menu;
   
-  // Position
   const menuRect = menu.getBoundingClientRect();
   let top = rect.bottom + 5;
   if(top + menuRect.height > window.innerHeight) top = rect.top - menuRect.height - 5;
@@ -1618,8 +1598,6 @@ function exportCSV(){
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   a.download='articleship_'+new Date().toISOString().split('T')[0]+'.csv';a.click();
 }
-
-
 </script>
 </body>
 </html>
